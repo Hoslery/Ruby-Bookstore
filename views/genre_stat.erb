@@ -1,0 +1,37 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12">
+    <h3 style="text-align:center">Статистика по жанрам</h3>
+    <table>
+      <thead>
+        <tr>
+          <th width="200">Жанр</th>
+          <th width="200">Кол-во книг</th>
+          <th width="200">Средняя стоимость</th>
+          <th width="200">Суммарное кол-во экземпляров</th>
+          <th>Процент количества экземпляров относительно общего числа товаров в магазине</th>
+        </tr>
+      </thead>
+      <%all = 0%>
+      <%@genres.each do |k,v|%>
+        <%all += v%>
+      <%end%>
+      <%all += @supplies.sum_instance%>
+      <%p all%>
+      <%@genres.each do |k,v|%>
+        <tbody>
+          <tr>
+            <%pr = Float(v.to_f/all) * 100%>
+            <td><%=k%></td>
+            <td><%=@books.count_book_by_genre(k)%></td>
+            <td><%=(@books.sum_of_price(k)/@books.count_book_by_genre(k)).round(2)%></td>
+            <td><%=v%></td>
+            <td><%=pr.round(2)%>%</td>
+          </tr>
+        </tbody>
+      <%end%>
+    </table>
+    <p>
+      <a href="/shop">К списку товаров</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12">
+    <h3 style="text-align:center">Оплаченные заказы</h3>
+    <p>
+      <a href="/shop/list">К списку покупок</a>
+    </p>
+    <%if @files.empty?%>
+        <div class="cell callout warning">
+            Ни один заказ не был оплачен
+        </div>
+    <%else%>
+        <%count = 1%>
+        <%@files.uniq.each do |name|%>
+            <div class="cell">
+                <%=count%> список покупок
+            </div>
+            <%CSV.foreach("#{name}.csv", headers: true) do |row|%>
+                <div class="cell">
+                    Товар : <%=row[0]%>, Цена : <%=row[1]%>, Кол-во : <%=row[2]%>
+                </div>
+            <%end%>
+            <div class="cell">
+                --------------------
+            </div>
+            <%count += 1%>
+        <%end%>
+    <%end%>
+  </div>
+</div>

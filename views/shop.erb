@@ -1,0 +1,82 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12" style = "text-align: center">
+    <h3>Список товаров</h3>
+  </div>
+
+  <% if @books.size == 0 &&  @supplies.size == 0 %>
+    <div class="cell large-12 callout warning">
+      В приложении нет информации о товарах
+    </div>
+  <% else%>
+    <div class="cell large-6" style = "text-align: left">
+        <h4>Книги</h4>
+        <div class="grid-x grid-padding-x">
+            <div class="grid-y">
+                <% if @books.size == 0%>
+                  <div class="cell callout warning">
+                    В приложении нет информации о книгах
+                  </div>
+                <% else%>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th width="150">Фамилия автора</th>
+                          <th width="150">Название книги</th>
+                          <th width="150">Жанр</th>
+                          <th width="150">Цена</th>
+                          <th width="150">Кол-во в магазине</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @books.each do |book| %>
+                          <tr>
+                            <td><%= book.author%></td>
+                            <td><%= book.title%></td>
+                            <td><%= book.genre%></td>
+                            <td><%= book.price.round(2)%></td>
+                            <td><%= book.quantity%></td>
+                            <td><a class="button warning" href="/shop/delete_book/<%= book.id %>">Удалить</a></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="cell large-6" style = "text-align: right">
+        <h4>Канцелярские принадлежности</h4>
+        <div class="grid-x grid-padding-x" style = "justify-content: right">
+            <div class="grid-y">
+                <% if @supplies.size == 0 %>
+                <div class="cell callout warning">
+                В приложении нет информации о канц. товарах
+                </div>
+                <% else%>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th width="150" style="text-align: center">Название</th>
+                          <th width="150" style="text-align: center">Цена</th>
+                          <th width="150" style="text-align: center">Кол-во в магазине</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% @supplies.each do |sup| %>
+                          <tr>
+                            <td style="text-align: center"><%= sup.title%></td>
+                            <td style="text-align: center"><%= sup.price.round(2)%></td>
+                            <td style="text-align: center"><%= sup.quantity%></td>
+                          </tr>
+                          <tr><td colspan="3" style="text-align:center"><a class="button warning" href="/shop/delete_sup/<%= sup.id %>">Удалить</a></td></tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                <% end %>
+            </div>
+        </div>
+    </div>
+  <%end%>
+
+</div>

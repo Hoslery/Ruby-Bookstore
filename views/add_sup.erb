@@ -1,0 +1,14 @@
+<% form({ method: :post },{ obj: @parameters }) do |f| %>
+  <div class="grid-x grid-margin-x">
+    <div class="large-12 cell">
+      <%= f.input(:title, type: :text, label: 'Название канцелярского товара', placeholder: 'Ножницы')%>
+    </div>
+    <div class="large-12 cell">
+      <%= f.input(:price, type: :text, label: 'Цена', placeholder: '300') %>
+    </div>
+    <div class="large-12 cell">
+      <%= f.button(value: 'Добавить', class: 'button') %>
+      <a href="/shop" class="button secondary">Отмена</a>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,56 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12">
+    <h3 style="text-align:center">Список покупок</h3>
+    <a class="button" href="/shop/list/add_list_book">Добавить книгу</a>
+    <a class="button" href="/shop/list/add_list_sup">Добавить канц. товар</a>
+    <a class="button" href="/shop/list/paid">Просмотреть оплаченные заказы</a>
+    <%if @shop_list.empty?%>
+        <div class="cell callout warning">
+            Список покупок пуст
+        </div>
+    <%else%>
+        <a class="alert button" href="/shop/list/delete_list">Удалить список покупок</a>
+        <a class="success button" href="/shop/list/pay_for_list">Оплатить список покупок</a>
+        <table> 
+            <thead>
+                <tr>
+                <th width="150">Товар</th>
+                <th width="150">Цена</th>
+                <th width="150">Кол-во штук</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%sum = 0%>
+                <%@shop_list.each do |k,v|%>
+                    <tr>
+                    <%if k.include? "_sup"%>
+                        <td><%=k.split('_')[0]%></td>
+                        <td><%=(@supplies.search_price_by_title(k.split('_')[0])*v).round(2)%></td>
+                        <%sum += @supplies.search_price_by_title(k.split('_')[0])*v%>
+                        <%if @supplies.search_quantity_by_title(k.split('_')[0]) == v%>
+                            <td><%=v%>(Максимум)</td>
+                        <%else%>
+                            <td><%=v%></td>
+                        <%end%>
+                    <%else%>
+                        <td><%=k%></td>
+                        <td><%=(@books.search_price_by_title(k)*v).round(2)%></td>
+                        <%sum += @books.search_price_by_title(k)*v%>
+                        <%if @books.search_quantity_by_title(k) == v%>
+                            <td><%=v%>(Максимум)</td>
+                        <%else%>
+                            <td><%=v%></td>
+                        <%end%>
+                    <%end%>
+                    <td><a class="button warning" href="/shop/list/delete_product/<%=k%>">Удалить</a></td>
+                    </tr>
+                <%end%>
+            </tbody>
+        </table>
+        Сумма покупок составит: <%=sum.round(2)%>
+    <%end%>
+    <p>
+        <a href="/shop">К списку товаров</a>
+    </p>
+  </div>
+</div>

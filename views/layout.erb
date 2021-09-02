@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжный магазин</title>
+    <link rel="stylesheet" href="/css/foundation.css">
+    <link rel="stylesheet" href="/css/app.css">
+  </head>
+  <body>
+    <div class="top-bar">
+       <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text" style="margin: 6px">Shop</li>
+            <li style="margin: 6px"><a class="button" href="/shop/add_book">Добавить книгу</a></li>
+            <li style="margin: 6px"><a class="button" href="/shop/add_sup">Добавить канц. товар</a></li>
+            <li style="margin: 6px"><a class="button" href="/shop/genre_stat">Статистика по жанрам</a></li>
+            <li style="margin: 6px"><a class="button" href="/shop/list">Создать список покупок</a></li>
+          </ul>
+        </div>
+        <div class="top-bar-right">
+          <% form({ method: :get }, { obj: @parameters }) do |f| %>
+           <ul class="menu">
+                <li><%= f.input(:s_title, type: :text, placeholder: 'Поиск по названию') %></li>
+                <li><%= f.input(:s_genre, type: :text, placeholder: 'Поиск по жанру') %></li>
+                <li><%= f.button(value: 'Поиск', class: 'button') %></li>
+           </ul>
+          <%end%>
+        </div>
+    </div>
+    <div class="grid-container">
+      <div class="grid-x grid-padding-x">
+        <div class="large-12 cell" style = "text-align: center">
+          <h2>Книжный магазин</h2>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/vendor/what-input.js"></script>
+    <script src="/js/vendor/foundation.js"></script>
+  </body>
+</html>

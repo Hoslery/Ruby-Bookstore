@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+require_relative 'models/book_list'
+require_relative 'models/book'
+require_relative 'models/office_sup'
+require_relative 'models/office_sup_list'
+require_relative 'models/reader'
+require_relative 'models/writer'
+require_relative 'models/book_new_form_schema'
+require_relative 'models/dry_result_forme_wrapper'
+require_relative 'models/sup_new_form_schema'
+require_relative 'models/search_filter_form_schema'
+require_relative 'models/product_delete_schema'
+require_relative 'models/list_product_form_schema'
+require_relative 'models/file_name_form_schema'
+require_relative 'models/same_func'
